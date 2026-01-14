@@ -1,13 +1,13 @@
 import { Router, Request, Response } from "express";
-import { User } from "../types/user";
+import { Task } from "../types/user";
 
 const router = Router();
 
-let users: User[] = [];
+let tasks: Task[] = [];
 
 // GET all users
 router.get("/", (req: Request, res: Response) => {
-  res.json({ users });
+  res.json({ tasks });
 });
 
 // POST add user
@@ -20,12 +20,12 @@ router.post("/", (req: Request, res: Response) => {
     });
   }
 
-  const newUser: User = {
-    id: users.length + 1,
+  const newUser:Task = {
+    id: tasks.length + 1,
     name
   };
 
-  users.push(newUser);
+  tasks.push(newUser);
 
   res.status(201).json({
     message: "User added successfully",
@@ -43,7 +43,7 @@ router.delete("/:id", (req: Request, res: Response) => {
     });
   }
 
-  const index = users.findIndex((user) => user.id === id);
+  const index = tasks.findIndex((user) => user.id === id);
 
   if (index === -1) {
     return res.status(404).json({
@@ -51,7 +51,7 @@ router.delete("/:id", (req: Request, res: Response) => {
     });
   }
 
-  users.splice(index, 1);
+  tasks.splice(index, 1);
 
   res.json({
     message: "User deleted successfully"
@@ -59,3 +59,4 @@ router.delete("/:id", (req: Request, res: Response) => {
 });
 
 export default router;
+ 
