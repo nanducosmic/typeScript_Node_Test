@@ -24,7 +24,7 @@ export const createTask = async (req: Request, res: Response) => {
 // READ
 export const getTasks = async (_req: Request, res: Response) => {
   try {
-    const result = await pool.query("SELECT * FROM tasks");
+    const result = await pool.query("SELECT * FROM tasks ORDER BY id ASC");
     res.json(result.rows);
   } catch {
     res.status(500).json({ error: "Failed to fetch tasks" });
